@@ -334,7 +334,7 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
                     showToast(R.string.msg_nmea_recording_started);
 
                 } else {
-                    Toast.makeText(this, "UsbGps logger - No storage permission", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, R.string.error_storage_permission_required, Toast.LENGTH_SHORT)
                             .show();
 
                     edit.putBoolean(PREF_TRACK_RECORDING, false)

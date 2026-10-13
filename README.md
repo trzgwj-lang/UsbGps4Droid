@@ -1,6 +1,6 @@
 # VK-172 assisted GPS development fork
 
-This fork adds opt-in **u-blox 7 / VK-172 GPS assistance**: UBX device identification, host UTC time aiding, conservative ephemeris caching, legacy AssistNow Online download/injection, and startup diagnostics. No root is needed for these additions.
+This fork adds opt-in **u-blox 7 / VK-172 GPS assistance**: UBX device identification, host UTC time aiding, conservative ephemeris caching, legacy AssistNow Online download/injection, and startup diagnostics. No root is needed for these additions. Full Simplified Chinese UI, notifications and assistance diagnostics follow the Android system language.
 
 **Experimental:** automated protocol tests are not a substitute for testing with a real VK-172. Online assistance requires your own valid legacy service token; live service access and positioning improvements have not been verified.
 

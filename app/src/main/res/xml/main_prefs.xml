@@ -38,7 +38,7 @@
         android:dependency="@string/pref_start_gps_key"
         android:dialogTitle="@string/pref_gps_device_speed_title"
         android:enabled="true"
-        android:entries="@array/pref_gps_device_speed_values"
+        android:entries="@array/pref_gps_device_speed_labels"
         android:entryValues="@array/pref_gps_device_speed_values"
         android:key="@string/pref_gps_device_speed_key"
         android:persistent="true"

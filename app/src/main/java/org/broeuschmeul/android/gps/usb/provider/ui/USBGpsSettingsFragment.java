@@ -331,12 +331,10 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
             devicePreference.setValue("current");
 
             devicePreference.setSummary(getString(R.string.pref_gps_device_summary, getSelectedDeviceSummary()));
-            deviceSpeedPreference.setSummary(getString(
-                    R.string.pref_gps_device_speed_summary,
-                    sharedPreferences.getString(
-                            USBGpsProviderService.PREF_GPS_DEVICE_SPEED, getString(R.string.defaultGpsDeviceSpeed))
-                    )
-            );
+            String speed = sharedPreferences.getString(USBGpsProviderService.PREF_GPS_DEVICE_SPEED,
+                    getString(R.string.defaultGpsDeviceSpeed));
+            deviceSpeedPreference.setSummary(getString(R.string.pref_gps_device_speed_summary,
+                    speed.equals(getString(R.string.autoGpsDeviceSpeed)) ? getString(R.string.speed_auto) : speed));
         }
     }
 
@@ -349,7 +347,7 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
         int vendorId = sharedPreferences.getInt(
                 USBGpsProviderService.PREF_GPS_DEVICE_VENDOR_ID, DEFAULT_GPS_VENDOR_ID);
 
-        String deviceDisplayedName = "Device not connected - " + vendorId + ": " + productId;
+        String deviceDisplayedName = getString(R.string.device_not_connected_detail, vendorId, productId);
 
         for (UsbDevice usbDevice: usbManager.getDeviceList().values()) {
             if (usbDevice.getVendorId() == vendorId && usbDevice.getProductId() == productId) {

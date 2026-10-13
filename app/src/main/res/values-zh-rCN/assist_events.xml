@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="assist_event_connected">USB 已连接，正在识别接收器版本</string>
+    <string name="assist_event_unsupported">未收到兼容的 u-blox 7 回应，已跳过辅助定位，继续普通定位</string>
+    <string name="assist_event_no_cache">暂无可读取的星历缓存</string>
+    <string name="assist_event_time_sent">已向 GPS 发送安卓 UTC 时间，时间不确定度为 10 秒</string>
+    <string name="assist_event_invalid_time">安卓日期异常，已跳过时间辅助</string>
+    <string name="assist_event_poll_failed">查询星历失败，继续普通定位</string>
+    <string name="assist_event_write_failed">通过 USB 发送辅助数据失败，继续普通定位</string>
+    <string name="assist_event_missing_token">未配置旧版 AssistNow 访问凭证，已跳过在线星历下载</string>
+    <string name="assist_event_throttled">距上次在线请求不足 5 分钟，暂不重试，继续普通定位</string>
+    <string name="assist_event_downloading">正在下载 GPS 辅助数据</string>
+    <string name="assist_event_download_failed">在线下载失败，请检查网络、凭证、服务或数据格式；继续普通定位</string>
+    <string name="assist_event_rejected">接收器拒绝了 UBX 命令，请检查协议兼容性</string>
+    <string name="assist_event_cache_failed">无法保存星历缓存</string>
+    <string name="assist_event_cache_sent">已回传 %1$d 份有效缓存星历</string>
+    <string name="assist_event_online_sent">已发送 %1$d 帧在线轨道或辅助数据，随后查询接收器状态；发送成功不代表已完成定位</string>
+    <string name="assist_event_version">接收器硬件：%1$s，固件：%2$s；%3$s</string>
+    <string name="assist_event_compatible">已确认是 u-blox 7</string>
+    <string name="assist_event_incompatible">此辅助模式暂不支持该型号</string>
+    <string name="assist_event_readback">连接 %1$s 秒后，接收器报告已有可用的 GPS 星历</string>
+    <string name="assist_event_first_nmea">连接 %1$s 秒后收到第一条 NMEA 数据</string>
+    <string name="assist_event_first_fix">USB 连接后首次有效定位耗时：%1$s 秒</string>
+    <string name="assist_event_line">[辅助定位 +%1$s 秒] %2$s</string>
+</resources>
