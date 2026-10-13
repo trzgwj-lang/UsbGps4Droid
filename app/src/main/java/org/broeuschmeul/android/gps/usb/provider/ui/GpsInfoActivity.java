@@ -116,13 +116,13 @@ public class GpsInfoActivity extends USBGpsBaseActivity implements
             );
         }
 
-        String accuracyValue = "N/A";
-        String numSatellitesValue = "N/A";
-        String lat = "N/A";
-        String lon = "N/A";
-        String elevation = "N/A";
-        String gpsTime = "N/A";
-        String systemTime = "N/A";
+        String accuracyValue = getString(R.string.data_unavailable);
+        String numSatellitesValue = getString(R.string.data_unavailable);
+        String lat = getString(R.string.data_unavailable);
+        String lon = getString(R.string.data_unavailable);
+        String elevation = getString(R.string.data_unavailable);
+        String gpsTime = getString(R.string.data_unavailable);
+        String systemTime = getString(R.string.data_unavailable);
 
         Location location = application.getLastLocation();
         if (!running) {

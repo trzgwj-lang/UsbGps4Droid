@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="assist_event_connected">USB connected; checking receiver version</string>
+    <string name="assist_event_unsupported">No compatible u-blox 7 response; assistance skipped, normal GPS continues</string>
+    <string name="assist_event_no_cache">No readable ephemeris cache</string>
+    <string name="assist_event_time_sent">Android UTC time sent (10s uncertainty)</string>
+    <string name="assist_event_invalid_time">Android date invalid; time assistance skipped</string>
+    <string name="assist_event_poll_failed">Ephemeris poll failed; normal GPS continues</string>
+    <string name="assist_event_write_failed">USB assistance write failed; normal GPS continues</string>
+    <string name="assist_event_missing_token">Online assistance skipped: configure a legacy AssistNow token</string>
+    <string name="assist_event_throttled">Online retry limited to once per 5 minutes; normal GPS continues</string>
+    <string name="assist_event_downloading">Downloading legacy GPS assistance</string>
+    <string name="assist_event_download_failed">Online download failed (network, token, service or data format); normal GPS continues</string>
+    <string name="assist_event_rejected">Receiver rejected a UBX command; inspect protocol compatibility</string>
+    <string name="assist_event_cache_failed">Cannot save ephemeris cache</string>
+    <string name="assist_event_cache_sent">Fresh cached ephemerides sent: %1$d</string>
+    <string name="assist_event_online_sent">Online orbit/auxiliary frames sent: %1$d; receiver readback follows (not a fix guarantee)</string>
+    <string name="assist_event_version">Receiver HW %1$s, SW %2$s; %3$s</string>
+    <string name="assist_event_compatible">u-blox 7 confirmed</string>
+    <string name="assist_event_incompatible">unsupported for this assistance mode</string>
+    <string name="assist_event_readback">Receiver reports a usable GPS ephemeris after %1$s s</string>
+    <string name="assist_event_first_nmea">First NMEA data after %1$s s</string>
+    <string name="assist_event_first_fix">First valid position after USB connection: %1$s s</string>
+    <string name="assist_event_line">[Assist +%1$s s] %2$s</string>
+</resources>

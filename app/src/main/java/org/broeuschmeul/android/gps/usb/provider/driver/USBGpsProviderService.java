@@ -140,16 +140,10 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
 
             if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) &&
                     sharedPreferences.getBoolean(PREF_START_ON_BOOT, false))  {
-                new Handler(context.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (BuildConfig.DEBUG) Log.d(LOG_TAG, "Boot start");
-                        context.startService(
-                                new Intent(context, USBGpsProviderService.class)
-                                        .setAction(ACTION_START_GPS_PROVIDER)
-                        );
-                    }
-                }, 2000);
+                Intent service = new Intent(context, USBGpsProviderService.class)
+                        .setAction(ACTION_START_GPS_PROVIDER);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(service);
+                else context.startService(service);
             }
         }
     }
@@ -158,10 +152,41 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
     public void onCreate() {
         super.onCreate();
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        showServiceNotification();
+    }
+
+    private void showServiceNotification() {
+        PendingIntent launchIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, GpsInfoActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+        NotificationCompat.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(
+                    new NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                getString(R.string.app_name),
+                NotificationManager.IMPORTANCE_HIGH
+                    )
+            );
+            builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        } else {
+            builder = new NotificationCompat.Builder(this, "");
+        }
+
+        Notification notification = builder
+                .setContentIntent(launchIntent)
+                .setSmallIcon(R.drawable.ic_stat_notify)
+                .setAutoCancel(true)
+                .setContentTitle(getString(R.string.foreground_service_started_notification_title))
+                .setContentText(getString(R.string.foreground_gps_provider_started_notification))
+                .build();
+
+        startForeground(R.string.foreground_gps_provider_started_notification, notification);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent == null) { stopSelf(); return START_NOT_STICKY; }
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = sharedPreferences.edit();
 
@@ -198,14 +223,6 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
                 if (enabled) {
                     gpsManager.enableMockLocationProvider(mockProvider);
 
-                    PendingIntent launchIntent =
-                            PendingIntent.getActivity(
-                                    this,
-                                    0,
-                                    new Intent(this, GpsInfoActivity.class),
-                                    PendingIntent.FLAG_CANCEL_CURRENT
-                            );
-
                     sharedPreferences
                             .edit()
                             .putInt(
@@ -213,30 +230,6 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
                             )
                             .apply();
 
-                    NotificationCompat.Builder builder;
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        notificationManager.createNotificationChannel(
-                                new NotificationChannel(
-                                        NOTIFICATION_CHANNEL_ID,
-                                        getString(R.string.app_name),
-                                        NotificationManager.IMPORTANCE_HIGH
-                                )
-                        );
-                        builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-                    } else {
-                        builder = new NotificationCompat.Builder(this, "");
-                    }
-
-                    Notification notification = builder
-                            .setContentIntent(launchIntent)
-                            .setSmallIcon(R.drawable.ic_stat_notify)
-                            .setAutoCancel(true)
-                            .setContentTitle(getString(R.string.foreground_service_started_notification_title))
-                            .setContentText(getString(R.string.foreground_gps_provider_started_notification))
-                            .build();
-
-                    startForeground(R.string.foreground_gps_provider_started_notification, notification);
 
                     showToast(R.string.msg_gps_provider_started);
 
@@ -341,7 +334,7 @@ public class USBGpsProviderService extends Service implements USBGpsManager.Nmea
                     showToast(R.string.msg_nmea_recording_started);
 
                 } else {
-                    Toast.makeText(this, "UsbGps logger - No storage permission", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, R.string.error_storage_permission_required, Toast.LENGTH_SHORT)
                             .show();
 
                     edit.putBoolean(PREF_TRACK_RECORDING, false)

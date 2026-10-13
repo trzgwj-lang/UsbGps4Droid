@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- This focused hardware test fork keeps the upstream support libraries and target SDK.
+         Report their modernization work without treating it as a release/store readiness claim. -->
+    <issue id="GradleCompatible" severity="warning" />
+    <issue id="ExpiredTargetSdkVersion" severity="warning" />
+</lint>

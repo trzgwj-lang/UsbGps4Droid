@@ -25,6 +25,10 @@ package org.broeuschmeul.android.gps.usb.provider.ui;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.widget.EditText;
+import android.text.InputType;
+import android.content.DialogInterface;
+import org.broeuschmeul.android.gps.usb.provider.ublox.UbloxAssistSession;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -147,6 +151,40 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
         mainHandler = new Handler(getActivity().getMainLooper());
 
         setupNestedPreferences();
+        setupAssistancePreferences();
+    }
+
+    private void setupAssistancePreferences() {
+        updateAssistanceSummary();
+        findPreference("assistToken").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override public boolean onPreferenceClick(Preference preference) {
+                final EditText input = new EditText(getActivity());
+                input.setSingleLine(true);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                final SharedPreferences secrets = getActivity().getSharedPreferences(UbloxAssistSession.SECRETS, Context.MODE_PRIVATE);
+                // Do not preload the credential into the view hierarchy or saved instance state.
+                input.setSaveEnabled(false);
+                new AlertDialog.Builder(getActivity()).setTitle(R.string.assist_token)
+                        .setMessage(R.string.assist_token_help).setView(input)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setPositiveButton(R.string.assist_save, new DialogInterface.OnClickListener() {
+                            @Override public void onClick(DialogInterface dialog, int which) {
+                                secrets.edit().putString(UbloxAssistSession.TOKEN, input.getText().toString().trim()).apply();
+                                input.setText("");
+                                updateAssistanceSummary();
+                            }
+                        }).show();
+                return true;
+            }
+        });
+    }
+
+    private void updateAssistanceSummary() {
+        boolean configured = !getActivity().getSharedPreferences(UbloxAssistSession.SECRETS, Context.MODE_PRIVATE)
+                .getString(UbloxAssistSession.TOKEN, "").isEmpty();
+        findPreference("assistToken").setSummary(configured ? R.string.assist_token_set : R.string.assist_token_missing);
+        findPreference("assistStatus").setSummary(sharedPreferences.getString(UbloxAssistSession.STATUS,
+                getString(R.string.assist_status_idle)));
     }
 
     private void onDaynightModeChanged(boolean on) {
@@ -293,12 +331,10 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
             devicePreference.setValue("current");
 
             devicePreference.setSummary(getString(R.string.pref_gps_device_summary, getSelectedDeviceSummary()));
-            deviceSpeedPreference.setSummary(getString(
-                    R.string.pref_gps_device_speed_summary,
-                    sharedPreferences.getString(
-                            USBGpsProviderService.PREF_GPS_DEVICE_SPEED, getString(R.string.defaultGpsDeviceSpeed))
-                    )
-            );
+            String speed = sharedPreferences.getString(USBGpsProviderService.PREF_GPS_DEVICE_SPEED,
+                    getString(R.string.defaultGpsDeviceSpeed));
+            deviceSpeedPreference.setSummary(getString(R.string.pref_gps_device_speed_summary,
+                    speed.equals(getString(R.string.autoGpsDeviceSpeed)) ? getString(R.string.speed_auto) : speed));
         }
     }
 
@@ -311,7 +347,7 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
         int vendorId = sharedPreferences.getInt(
                 USBGpsProviderService.PREF_GPS_DEVICE_VENDOR_ID, DEFAULT_GPS_VENDOR_ID);
 
-        String deviceDisplayedName = "Device not connected - " + vendorId + ": " + productId;
+        String deviceDisplayedName = getString(R.string.device_not_connected_detail, vendorId, productId);
 
         for (UsbDevice usbDevice: usbManager.getDeviceList().values()) {
             if (usbDevice.getVendorId() == vendorId && usbDevice.getProductId() == productId) {
@@ -449,6 +485,7 @@ public class USBGpsSettingsFragment extends PreferenceFragmentCompat implements
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
         log("Shared preferences changed: " + key);
 
+        if (UbloxAssistSession.STATUS.equals(key)) updateAssistanceSummary();
         switch(key) {
             case USBGpsProviderService.PREF_START_GPS_PROVIDER: {
                 boolean val = sharedPreferences.getBoolean(key, false);

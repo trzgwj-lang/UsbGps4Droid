@@ -84,24 +84,16 @@ public class USBGpsApplication extends Application {
     }
 
     public void notifyNewSentence(final String sentence) {
-        if (logLines.size() > LOG_SIZE) {
-            logLines.remove(0);
-        }
-
-        logLines.add(sentence);
-
-        synchronized (serviceDataListeners) {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    for (ServiceDataListener dataListener: serviceDataListeners) {
-                        dataListener.onNewSentence(sentence);
-                    }
-                }
-            });
-
-        }
+        // USB reads and the assistance worker both produce events. Serialize UI delivery and history.
+        mainHandler.post(new Runnable() {
+            @Override public void run() {
+                if (logLines.size() >= LOG_SIZE) logLines.remove(0);
+                logLines.add(sentence);
+                for (ServiceDataListener listener : new ArrayList<>(serviceDataListeners)) listener.onNewSentence(sentence);
+            }
+        });
     }
+
 
     public void notifyNewLocation(final Location location) {
         lastLocation = location;

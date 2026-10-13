@@ -91,6 +91,8 @@ public class NmeaParser {
         this.lm = lm;
     }
 
+    // Criteria constants have the same values as API 31 ProviderProperties; keep API 14 compatibility.
+    @SuppressLint("WrongConstant")
     public void enableMockLocationProvider(String gpsName, boolean force) {
         try {
             LocationProvider prov;

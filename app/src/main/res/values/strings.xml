@@ -117,23 +117,22 @@
 
     <string name="about_title">About</string>
     <string name="about_version">UsbGPS4Droid %s</string>
-    <string name="about_copyright_1">Copyright (C) 2015-2017 Oliver Bell</string>
-    <string name="about_copyright_2">Copyright (C) 2010-2013 Herbert von Broeuschmeul</string>
-    <string name="about_copyright_3">Copyright (C) 2010-2013 BluetoothGPS4Droid Project</string>
-    <string name="about_copyright_4">Copyright (C) 2011-2013 UsbGPS4Droid Project</string>
+    <string name="about_copyright_1" translatable="false">Copyright (C) 2015-2017 Oliver Bell</string>
+    <string name="about_copyright_2" translatable="false">Copyright (C) 2010-2013 Herbert von Broeuschmeul</string>
+    <string name="about_copyright_3" translatable="false">Copyright (C) 2010-2013 BluetoothGPS4Droid Project</string>
+    <string name="about_copyright_4" translatable="false">Copyright (C) 2011-2013 UsbGPS4Droid Project</string>
     <string name="about_app_desc">Usb GPS for Android is an application
                                     for using an external usb GPS on Android devices.
     </string>
     <string name="about_license">It is open source software 
     	distributed free of charge under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html"><b>GNU General Public License</b></a>.
     </string>
-    <string name="about_sources">The source code is available here:
-        https://github.com/freshollie/UsbGps4Droid
+    <string name="about_sources">This fork: https://github.com/trzgwj-lang/UsbGps4Droid\nUpstream: https://github.com/freshollie/UsbGps4Droid
     </string>
 
     <string name="msg_no_location_permission">No permission given for device location. Click here to enable.</string>
 
-    <string-array name="pref_gps_device_speed_values">
+    <string-array name="pref_gps_device_speed_values" translatable="false">
         <item>auto</item>
         <item>1200</item>
         <item>2400</item>
@@ -167,7 +166,7 @@
     <string name="pref_category_nmea_log_title">NMEA Log</string>
     <string name="pref_category_debug_title">Debug</string>
     <string name="pref_category_other">Other</string>
-    <string name="pref_set_time_key">setTime</string>
+    <string name="pref_set_time_key" translatable="false">setTime</string>
     <string name="pref_set_time_summary_on">Set the system time to the gps time when a time is received</string>
     <string name="pref_set_time_summary_off">Don\'t set the system time to the gps time</string>
     <string name="pref_set_time_title">Set system time from GPS (Root required)</string>
@@ -183,6 +182,28 @@
     <string name="pref_set_time_summary">Set the system time from the received GPS time</string>
     <string name="pref_daynight_theme_title">Automatic day-night app theme</string>
     <string name="pref_daynight_theme_summary">Show light theme during daytime and dark theme at night</string>
-    <string name="pref_daynight_theme_key">dayNightMode</string>
+    <string name="pref_daynight_theme_key" translatable="false">dayNightMode</string>
 
+    <string name="assist_category">VK-172 / u-blox 7 assistance</string>
+    <string name="assist_enable">Enable GPS assistance</string>
+    <string name="assist_enable_summary">Checks receiver version, restores fresh GPS ephemerides and logs startup times. No root. Stop GPS to change this setting. SiRF commands are disabled in this mode.</string>
+    <string name="assist_time">Send Android time to GPS</string>
+    <string name="assist_time_summary">Enable only when Android date/time is correct (prefer automatic network time). Does not change Android time. Restart GPS after changes.</string>
+    <string name="assist_online">Download fresh GPS ephemerides</string>
+    <string name="assist_online_summary">Requires internet and a valid legacy AssistNow token. Legacy service ended regular support in May 2026. Downloads once at connection before a fix, with a 5-minute retry limit. Restart GPS after changes.</string>
+    <string name="assist_token">Legacy AssistNow access token</string>
+    <string name="assist_token_set">Configured; tap to replace or clear</string>
+    <string name="assist_token_missing">Not configured; online assistance will be skipped</string>
+    <string name="assist_token_help">Enter a legacy AssistNow Online token. It is sent only to the u-blox HTTPS service, stored privately on this device and excluded from Android backup. Leave empty to clear.</string>
+    <string name="assist_status">Last assistance event</string>
+    <string name="assist_status_idle">Enable assistance and start GPS. Detailed events appear in the GPS log.</string>
+    <string name="assist_save">Save</string>
+    <string name="service_switch_label">Enable USB GPS service</string>
+    <string name="data_unavailable">Not available</string>
+    <string name="device_not_connected_detail">Device not connected — %1$d:%2$d</string>
+    <string name="speed_auto">Automatic</string>
+    <string-array name="pref_gps_device_speed_labels">
+        <item>@string/speed_auto</item><item>1200</item><item>2400</item><item>4800</item>
+        <item>9600</item><item>19200</item><item>38400</item><item>57600</item><item>115200</item>
+    </string-array>
 </resources>
