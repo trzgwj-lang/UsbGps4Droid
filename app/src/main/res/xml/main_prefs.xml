@@ -75,6 +75,21 @@
         android:defaultValue="false"
         />
 
+    <PreferenceCategory android:title="@string/assist_category" />
+    <CheckBoxPreference android:key="ubloxAssist" android:defaultValue="false"
+        android:dependency="@string/pref_start_gps_key"
+        android:title="@string/assist_enable" android:summary="@string/assist_enable_summary" />
+    <CheckBoxPreference android:key="ubloxAssistHostTime" android:defaultValue="false"
+        android:dependency="ubloxAssist" android:title="@string/assist_time"
+        android:summary="@string/assist_time_summary" />
+    <CheckBoxPreference android:key="ubloxAssistOnline" android:defaultValue="false"
+        android:dependency="ubloxAssist" android:title="@string/assist_online"
+        android:summary="@string/assist_online_summary" />
+    <Preference android:key="assistToken" android:dependency="ubloxAssist"
+        android:title="@string/assist_token" />
+    <Preference android:key="assistStatus" android:title="@string/assist_status"
+        android:summary="@string/assist_status_idle" android:selectable="false" />
+
     <PreferenceCategory
         android:title="@string/pref_category_sirf_title"
         />

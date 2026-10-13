@@ -1,3 +1,15 @@
+# VK-172 assisted GPS development fork
+
+This fork adds opt-in **u-blox 7 / VK-172 GPS assistance**: UBX device identification, host UTC time aiding, conservative ephemeris caching, legacy AssistNow Online download/injection, and startup diagnostics. No root is needed for these additions.
+
+**Experimental:** automated protocol tests are not a substitute for testing with a real VK-172. Online assistance requires your own valid legacy service token; live service access and positioning improvements have not been verified.
+
+[中文安装说明、服务限制与测试方法](docs/VK172-ASSISTANCE.md)
+
+Debug builds use a separate `.vk172` application ID. Stop the original app before using the test build. This fork retains the upstream GPL-3.0 license and attribution.
+
+---
+
 <img align="right" alt="App icon" src="app-icon.png" height="115px">
 
 # UsbGps4Droid - A USB GPS provider for Android 

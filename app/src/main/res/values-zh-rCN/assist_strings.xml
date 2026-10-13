@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="assist_category">VK-172 / u-blox 7 辅助定位</string>
+    <string name="assist_enable">启用 GPS 辅助定位</string>
+    <string name="assist_enable_summary">识别模块版本，回传有效星历并记录定位耗时，无需 Root。停止 GPS 后可修改；启用时停用 SiRF 命令。</string>
+    <string name="assist_time">向 GPS 发送安卓时间</string>
+    <string name="assist_time_summary">请先确保安卓日期时间准确，建议开启网络自动校时。此功能不会修改安卓时间。修改后重启 GPS 服务。</string>
+    <string name="assist_online">下载新的 GPS 星历</string>
+    <string name="assist_online_summary">需要网络和旧版 AssistNow 凭证。旧版服务已于 2026 年 5 月结束常规支持。连接后、定位前尝试一次下载，两次请求至少间隔 5 分钟。修改后重启 GPS 服务。</string>
+    <string name="assist_token">旧版 AssistNow 访问凭证</string>
+    <string name="assist_token_set">已配置，点击替换或清除</string>
+    <string name="assist_token_missing">未配置，将跳过在线星历下载</string>
+    <string name="assist_token_help">填写旧版 AssistNow Online 凭证，仅通过 HTTPS 发送给 u-blox 服务，保存在本机私有存储，不进入安卓备份。留空保存即可清除。</string>
+    <string name="assist_status">最近的辅助定位事件</string>
+    <string name="assist_status_idle">启用辅助定位并启动 GPS 后，可在 GPS 日志查看详细事件。</string>
+    <string name="assist_save">保存</string>
+</resources>

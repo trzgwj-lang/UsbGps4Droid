@@ -82,7 +82,7 @@
     <string name="sirf_nmea_zda_off">PSRF103,08,00,00,01</string>
 
     <string name="sirf_nmea_to_binary">PSRF100,0,38400,8,1,0</string>
-    <string name="sirf_nmea_to_binary_alt" formatted="false">PSRF100,0,%d,8,1,0</string>
+    <string name="sirf_nmea_to_binary_alt">PSRF100,0,%d,8,1,0</string>
 
     <string name="sirf_nmea_sbas_on">PSRF151,01</string>
     <string name="sirf_nmea_sbas_off">PSRF151,00</string>

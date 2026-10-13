@@ -185,4 +185,18 @@
     <string name="pref_daynight_theme_summary">Show light theme during daytime and dark theme at night</string>
     <string name="pref_daynight_theme_key">dayNightMode</string>
 
+    <string name="assist_category">VK-172 / u-blox 7 assistance</string>
+    <string name="assist_enable">Enable GPS assistance</string>
+    <string name="assist_enable_summary">Checks receiver version, restores fresh GPS ephemerides and logs startup times. No root. Stop GPS to change this setting. SiRF commands are disabled in this mode.</string>
+    <string name="assist_time">Send Android time to GPS</string>
+    <string name="assist_time_summary">Enable only when Android date/time is correct (prefer automatic network time). Does not change Android time. Restart GPS after changes.</string>
+    <string name="assist_online">Download fresh GPS ephemerides</string>
+    <string name="assist_online_summary">Requires internet and a valid legacy AssistNow token. Legacy service ended regular support in May 2026. Downloads once at connection before a fix, with a 5-minute retry limit. Restart GPS after changes.</string>
+    <string name="assist_token">Legacy AssistNow access token</string>
+    <string name="assist_token_set">Configured; tap to replace or clear</string>
+    <string name="assist_token_missing">Not configured; online assistance will be skipped</string>
+    <string name="assist_token_help">Enter a legacy AssistNow Online token. It is sent only to the u-blox HTTPS service, stored privately on this device and excluded from Android backup. Leave empty to clear.</string>
+    <string name="assist_status">Last assistance event</string>
+    <string name="assist_status_idle">Enable assistance and start GPS. Detailed events appear in the GPS log.</string>
+    <string name="assist_save">Save</string>
 </resources>
